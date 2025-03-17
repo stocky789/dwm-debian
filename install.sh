@@ -23,7 +23,8 @@ apt install -y \
     thunar xorg xserver-xorg curl firefox-esr xinit x11-xserver-utils feh picom gdm3 \
     pavucontrol fonts-hack-ttf dwm libimlib2-dev fonts-font-awesome pamixer gamemode rofi flameshot wget \
     zsh timeshift pipewire pipewire-audio pipewire-alsa \
-    kitty lxappearance network-manager-gnome dunst build-essential libx11-dev libxft-dev libxinerama-dev curl unzip
+    kitty lxappearance network-manager-gnome dunst build-essential libx11-dev libxft-dev libxinerama-dev \
+    curl unzip qt5ct qt6ct 
 
 # Install Starship (since it's not in apt)
 echo "Installing Starship prompt..."
@@ -88,6 +89,22 @@ if [[ "$dotfiles_choice" == "yes" ]]; then
         fc-cache -fv
     '
     echo "Hack Nerd Font installed successfully."
+
+    # Configure Dark Mode for GTK
+    echo "Enabling GTK Dark Mode..."
+    sudo -u "$SUDO_USER" bash -c '
+        mkdir -p ~/.config/gtk-3.0 ~/.config/gtk-4.0
+        echo -e "[Settings]\ngtk-theme-name=Adwaita-dark\ngtk-application-prefer-dark-theme=1" > ~/.config/gtk-3.0/settings.ini
+        echo -e "[Settings]\ngtk-theme-name=Adwaita-dark\ngtk-application-prefer-dark-theme=1" > ~/.config/gtk-4.0/settings.ini
+        echo 'gtk-theme-name="Adwaita-dark"' > ~/.gtkrc-2.0
+    '
+    echo "GTK Dark Mode enabled."
+
+    # Configure Dark Mode for Qt
+    echo "Enabling Qt Dark Mode..."
+    echo 'export QT_QPA_PLATFORMTHEME=qt5ct' >> "$USER_HOME/.xprofile"
+    echo 'export QT_QPA_PLATFORMTHEME=qt6ct' >> "$USER_HOME/.xprofile"
+    echo "Qt Dark Mode enabled."
 
 else
     echo "Skipping dotfile installation."
