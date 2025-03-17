@@ -414,7 +414,7 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 #if BAR_LAUNCHER_PATCH
 static const Launcher launchers[] = {
     /* icon (Unicode)     command */
-    { "",               CMD("rofi", "-show", "drun") }, // Rofi App Launcher (Arch Linux Logo)
+    { "",               CMD("rofi", "-show", "drun") }, // Rofi App Launcher (Debian Linux Logo)
     { "",               CMD("firefox") },              // Firefox
     { "",               CMD("kitty") },        		// kitty
     { "",               CMD("thunar") },              // Thunar
