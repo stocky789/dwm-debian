@@ -119,6 +119,19 @@ sudo -u "$SUDO_USER" tee "$USER_HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xs
 EOF
 echo "Thunar Dark Mode enabled."
 
+# Configure Thunar Dark Mode
+echo "Enabling Thunar Dark Mode..."
+sudo -u "$SUDO_USER" bash -c 'mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml'
+sudo -u "$SUDO_USER" tee "$USER_HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml" > /dev/null << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xsettings" version="1.0">
+  <property name="Net">
+    <property name="ThemeName" type="string" value="Adwaita-dark"/>
+  </property>
+</channel>
+EOF
+echo "Thunar Dark Mode enabled."
+
 else
     echo "Skipping dotfile installation."
 fi
