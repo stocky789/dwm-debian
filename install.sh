@@ -72,6 +72,18 @@ if [[ "$dotfiles_choice" == "yes" ]]; then
     chown -R "$SUDO_USER:$SUDO_USER" "$USER_HOME/.config" "$USER_HOME/.xprofile"
     
     echo "Dotfiles installed successfully."
+
+        # Install Hack Nerd Font
+    echo "Installing Hack Nerd Font..."
+    sudo -u "$SUDO_USER" bash -c '
+        mkdir -p ~/.local/share/fonts
+        cd ~/.local/share/fonts
+        wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip
+        unzip Hack.zip
+        fc-cache -fv
+    '
+    echo "Hack Nerd Font installed successfully."
+
 else
     echo "Skipping dotfile installation."
 fi
