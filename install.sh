@@ -23,7 +23,11 @@ apt install -y \
     thunar xorg xserver-xorg xinit x11-xserver-utils feh picom gdm3 \
     pavucontrol fonts-hack-ttf fonts-font-awesome pamixer gamemode rofi flameshot wget \
     zsh timeshift pipewire pipewire-audio pipewire-alsa \
-    kitty lxappearance network-manager-gnome dunst build-essential libx11-dev libxft-dev libxinerama-dev
+    kitty lxappearance network-manager-gnome dunst build-essential libx11-dev libxft-dev libxinerama-dev curl
+
+# Install Starship (since it's not in apt)
+echo "Installing Starship prompt..."
+sudo -u "$SUDO_USER" sh -c 'curl -sS https://starship.rs/install.sh | sh -s -- -y'
 
 # Install NVIDIA drivers if selected
 if [[ "$nvidia_choice" == "yes" ]]; then
