@@ -28,6 +28,7 @@ sudo ./dwm-install.sh
 
 ## Customization
 - Modify `dwm` patches and settings in **`config.h`** then recompile in dwm directory (sudo make install)
+- Quickly toggle on or off patches in **`patches.h`**
 - Place your autostart scripts in **`~/.xprofile`**.
 - Use `picom` for transparency and compositing.
 
@@ -43,10 +44,11 @@ rm -rf ~/.config/dwm ~/.xprofile
   exec dwm
   ```
 - Check logs: `journalctl -xe` or `startx 2>&1 | tee dwm.log`
+- If you get a gdm3.service failure during the initial ./install.sh - rerun it.
 
 ## Credits
 This script is inspired by **Stocky's Arch DWM setup**, modified for Debian 12.
 
 ---
-Made with ❤️ for Debian users!
+Made for Debian users!
 
