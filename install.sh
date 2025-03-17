@@ -24,7 +24,7 @@ apt install -y \
     pavucontrol fonts-hack-ttf dwm libimlib2-dev fonts-font-awesome pamixer gamemode rofi flameshot wget \
     zsh timeshift pipewire pipewire-audio pipewire-alsa \
     kitty lxappearance network-manager-gnome dunst build-essential libx11-dev libxft-dev libxinerama-dev \
-    curl unzip qt5ct qt6ct 
+    curl unzip qt5ct qt6ct xfce4-settings
 
 # Install Starship (since it's not in apt)
 echo "Installing Starship prompt..."
@@ -105,6 +105,19 @@ if [[ "$dotfiles_choice" == "yes" ]]; then
     echo 'export QT_QPA_PLATFORMTHEME=qt5ct' >> "$USER_HOME/.xprofile"
     echo 'export QT_QPA_PLATFORMTHEME=qt6ct' >> "$USER_HOME/.xprofile"
     echo "Qt Dark Mode enabled."
+
+    # Configure Thunar Dark Mode
+    echo "Enabling Thunar Dark Mode..."
+    sudo -u "$SUDO_USER" bash -c '
+        mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml
+        echo '<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xsettings" version="1.0">
+  <property name="Net" >
+    <property name="ThemeName" type="string" value="Adwaita-dark"/>
+  </property>
+</channel>' > ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+    '
+    echo "Thunar Dark Mode enabled."
 
 else
     echo "Skipping dotfile installation."
