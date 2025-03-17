@@ -26,26 +26,8 @@ sudo ./dwm-install.sh
 - Decide if you want to **install custom dotfiles**.
 - Opt to **enable OpenSSH** for remote access.
 
-## Manual Installation
-If you prefer a manual setup, install dependencies:
-```bash
-sudo apt update && sudo apt install -y \
-    thunar xorg xserver-xorg xinit x11-xserver-utils feh picom gdm3 \
-    pavucontrol fonts-hack fonts-font-awesome pamixer gamemode rofi flameshot wget \
-    zsh timeshift pipewire pipewire-pulse pipewire-alsa \
-    kitty lxappearance network-manager-gnome dunst build-essential \
-    libx11-dev libxft-dev libxinerama-dev
-```
-
-Then clone and compile `dwm`:
-```bash
-git clone https://github.com/your-repo/dwm.git
-cd dwm
-make clean install
-```
-
 ## Customization
-- Modify `dwm` patches and settings in **`config.h`** before compiling.
+- Modify `dwm` patches and settings in **`config.h`** then recompile in dwm directory (sudo make install)
 - Place your autostart scripts in **`~/.xprofile`**.
 - Use `picom` for transparency and compositing.
 
