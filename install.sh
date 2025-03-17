@@ -24,7 +24,7 @@ apt install -y \
     pavucontrol fonts-hack-ttf dwm libimlib2-dev fonts-font-awesome adwaita-qt pamixer gamemode rofi flameshot wget \
     zsh timeshift pipewire pipewire-audio pipewire-alsa \
     kitty lxappearance network-manager-gnome dunst build-essential libx11-dev libxft-dev libxinerama-dev \
-    curl unzip qt5ct qt6ct xfce4-settings
+    curl unzip qt5ct qt6ct xfce4-settings gnome-themes-extra
 
 # Install Starship (since it's not in apt)
 echo "Installing Starship prompt..."
@@ -106,31 +106,30 @@ if [[ "$dotfiles_choice" == "yes" ]]; then
     echo 'export QT_QPA_PLATFORMTHEME=qt6ct' >> "$USER_HOME/.xprofile"
     echo "Qt Dark Mode enabled."
 
-# Configure Thunar Dark Mode
-echo "Enabling Thunar Dark Mode..."
-sudo -u "$SUDO_USER" bash -c 'mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml'
-sudo -u "$SUDO_USER" tee "$USER_HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml" > /dev/null << EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<channel name="xsettings" version="1.0">
-  <property name="Net">
-    <property name="ThemeName" type="string" value="Adwaita-dark"/>
-  </property>
-</channel>
-EOF
-echo "Thunar Dark Mode enabled."
+    # Configure Thunar Dark Mode
+    echo "Enabling Thunar Dark Mode..."
+    sudo -u "$SUDO_USER" bash -c '
+        mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml
 
-# Configure Thunar Dark Mode
-echo "Enabling Thunar Dark Mode..."
-sudo -u "$SUDO_USER" bash -c 'mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml'
-sudo -u "$SUDO_USER" tee "$USER_HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml" > /dev/null << EOF
+        tee ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml > /dev/null << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <channel name="xsettings" version="1.0">
   <property name="Net">
     <property name="ThemeName" type="string" value="Adwaita-dark"/>
+    <property name="IconThemeName" type="string" value="Adwaita"/>
   </property>
 </channel>
 EOF
-echo "Thunar Dark Mode enabled."
+
+        # Apply settings
+        xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
+        xfconf-query -c xsettings -p /Net/IconThemeName -s "Adwaita"
+
+        # Restart xfsettingsd to apply the theme immediately
+        pkill xfsettingsd || true
+        nohup xfsettingsd --no-daemon > /dev/null 2>&1 &
+    '
+    echo "Thunar Dark Mode enabled."
 
 else
     echo "Skipping dotfile installation."
@@ -167,7 +166,6 @@ if [[ "$xrandr_choice" == "no" ]]; then
     echo "Commenting out xrandr setup in .xprofile..."
     sed -i '/^xrandr --output/ {N; s/^/# /g}' "$USER_HOME/.xprofile"
 fi
-
 
 # Ask user if they want to set up OpenSSH
 read -p "Do you want to set up OpenSSH for remote access? (yes/no): " ssh_choice
