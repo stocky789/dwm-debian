@@ -122,8 +122,9 @@ read -p "Do you want to keep the xrandr display setup? (yes/no): " xrandr_choice
 
 if [[ "$xrandr_choice" == "no" ]]; then
     echo "Commenting out xrandr setup in .xprofile..."
-    sed -i 's|^\(xrandr --output\)|# \1|' "$USER_HOME/.xprofile"
+    sed -i '/^xrandr --output/ {N; s/^/# /g}' "$USER_HOME/.xprofile"
 fi
+
 
 # Ask user if they want to set up OpenSSH
 read -p "Do you want to set up OpenSSH for remote access? (yes/no): " ssh_choice
