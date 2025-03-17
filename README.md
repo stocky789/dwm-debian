@@ -40,7 +40,6 @@ rm -rf ~/.config/dwm ~/.xprofile
 
 ## Troubleshooting
 - If `dwm` doesn't start, ensure `~/.xprofile` contains:
-
   ```bash
   exec dwm
   ```
@@ -48,7 +47,7 @@ rm -rf ~/.config/dwm ~/.xprofile
 - If you get a gdm3.service failure during the initial ./install.sh - rerun it.
 
 ## Credits
-This script is inspired by **Stocky's Arch DWM setup**, modified for Debian 12.
+This script is inspired by **bakkeby dwm-flexipatch** and **suckless at [suckless.org](https://suckless.org/)** modified for Debian 12.
 
 ---
 Made for Debian users!
