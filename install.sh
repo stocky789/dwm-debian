@@ -23,7 +23,7 @@ apt install -y \
     thunar xorg xserver-xorg curl firefox-esr xinit x11-xserver-utils feh picom gdm3 \
     pavucontrol fonts-hack-ttf dwm libimlib2-dev fonts-font-awesome pamixer gamemode rofi flameshot wget \
     zsh timeshift pipewire pipewire-audio pipewire-alsa \
-    kitty lxappearance network-manager-gnome dunst build-essential libx11-dev libxft-dev libxinerama-dev curl
+    kitty lxappearance network-manager-gnome dunst build-essential libx11-dev libxft-dev libxinerama-dev curl unzip
 
 # Install Starship (since it's not in apt)
 echo "Installing Starship prompt..."
@@ -68,12 +68,17 @@ if [[ "$dotfiles_choice" == "yes" ]]; then
     # Copy .xprofile
     cp "$SCRIPT_DIR/.xprofile" "$USER_HOME/.xprofile"
     
-    # Set correct permissions
-    chown -R "$SUDO_USER:$SUDO_USER" "$USER_HOME/.config" "$USER_HOME/.xprofile"
+    # Ensure Pictures folder exists and copy wallpapers
+    echo "Creating Pictures directory and copying wallpapers..."
+    mkdir -p "$USER_HOME/Pictures/wallpapers"
+    cp -r "$SCRIPT_DIR/wallpapers"/* "$USER_HOME/Pictures/wallpapers/"
     
-    echo "Dotfiles installed successfully."
+    # Set correct permissions
+    chown -R "$SUDO_USER:$SUDO_USER" "$USER_HOME/.config" "$USER_HOME/.xprofile" "$USER_HOME/Pictures"
 
-        # Install Hack Nerd Font
+    echo "Dotfiles and wallpapers installed successfully."
+
+    # Install Hack Nerd Font
     echo "Installing Hack Nerd Font..."
     sudo -u "$SUDO_USER" bash -c '
         mkdir -p ~/.local/share/fonts
