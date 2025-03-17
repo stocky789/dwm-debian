@@ -40,6 +40,7 @@ rm -rf ~/.config/dwm ~/.xprofile
 
 ## Troubleshooting
 - If `dwm` doesn't start, ensure `~/.xprofile` contains:
+
   ```bash
   exec dwm
   ```
