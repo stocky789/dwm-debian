@@ -8,7 +8,15 @@ fi
 
 # Get script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-USER_HOME=$(eval echo ~$SUDO_USER)
+
+# Ensure the script is run via sudo and safely determine the invoking user's home
+if [ -z "$SUDO_USER" ]; then
+    echo "Please run this script via sudo."
+    exit 1
+fi
+
+# Look up the invoking user's home directory using getent for reliability
+USER_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
 
 # Update system
 echo "Updating system..."
