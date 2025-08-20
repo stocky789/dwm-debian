@@ -102,8 +102,13 @@ if [[ "$dotfiles_choice" == "yes" ]]; then
 
     # Configure Dark Mode for Qt
     echo "Enabling Qt Dark Mode..."
-    echo 'export QT_QPA_PLATFORMTHEME=qt5ct' >> "$USER_HOME/.xprofile"
-    echo 'export QT_QPA_PLATFORMTHEME=qt6ct' >> "$USER_HOME/.xprofile"
+    if command -v qt6ct >/dev/null 2>&1; then
+        echo 'export QT_QPA_PLATFORMTHEME=qt6ct' >> "$USER_HOME/.xprofile"
+    elif command -v qt5ct >/dev/null 2>&1; then
+        echo 'export QT_QPA_PLATFORMTHEME=qt5ct' >> "$USER_HOME/.xprofile"
+    else
+        echo "qt5ct/qt6ct not found. Skipping Qt theme configuration."
+    fi
     echo "Qt Dark Mode enabled."
 
     # Configure Thunar Dark Mode
