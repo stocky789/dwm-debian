@@ -16,7 +16,7 @@ This script automates the installation and configuration of **dwm** (Dynamic Win
 ## Installation
 ### 1. Download and Run the Script
 ```bash
-wget https://your-repo-url/dwm-debian-install.sh -O dwm-install.sh
+wget https://raw.githubusercontent.com/stocky789/dwm-debian/main/install.sh -O dwm-install.sh
 chmod +x dwm-install.sh
 sudo ./dwm-install.sh
 ```
