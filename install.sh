@@ -28,7 +28,7 @@ read -p "Are you installing on a system with an NVIDIA GPU? (yes/no): " nvidia_c
 # Install required packages
 echo "Installing DWM package dependencies..."
 apt install -y \
-    thunar xorg xserver-xorg curl firefox-esr xinit x11-xserver-utils feh picom gdm3 \
+    thunar xorg xserver-xorg curl firefox xinit x11-xserver-utils feh picom gdm3 \
     pavucontrol fonts-hack-ttf libimlib2-dev fonts-font-awesome adwaita-qt pamixer gamemode rofi flameshot wget \
     zsh timeshift pipewire pipewire-audio pipewire-alsa \
     kitty lxappearance network-manager-gnome dunst build-essential libx11-dev libxft-dev libxinerama-dev \
