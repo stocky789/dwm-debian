@@ -14,11 +14,16 @@ This script automates the installation and configuration of **dwm** (Dynamic Win
 - 🖥️ Enables `GDM3` as the default display manager.
 
 ## Installation
-### 1. Download and Run the Script
+### 1. Clone the Repository
 ```bash
-wget https://raw.githubusercontent.com/stocky789/dwm-debian/main/install.sh -O dwm-install.sh
-chmod +x dwm-install.sh
-sudo ./dwm-install.sh
+git clone https://github.com/stocky789/dwm-debian.git
+cd dwm-debian
+```
+
+### 2. Run the Installation Script
+```bash
+chmod +x install.sh
+sudo ./install.sh
 ```
 
 ### 2. Follow the Prompts
